@@ -22,16 +22,15 @@
         },
         "to": {
           "description": "The email address you want to send notifications to",
-            "required": false
+            "required": true
         },
         "lowerTick": {
-            "description": "Your secret key for your Fauna Database",
+            "description": "Minimum tick in a pool. You can track multiple ticks with a comma (e.g. 3500,2000,3400)",
             "required": true
         },
         "upperTick": {
-            "description": "How often you want to purchase.",
-            "required": true,
-            "value": "MONTHLY_1"
+            "description": "Maximum tick in a pool. You can track multiple ticks with a comma (e.g. 3500,4000,3900)",
+            "required": true
         }
       },
       "addons": [
