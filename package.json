@@ -1,0 +1,24 @@
+{
+  "name": "lpmonitor",
+  "version": "1.0.0",
+  "description": "This is a LP position monitor that lets traders know if their trading pair is out of bounds",
+  "main": "priceMonitor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jelilat Anofiu",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/client": "^3.4.10",
+    "@sendgrid/mail": "^7.4.6",
+    "axios": "^0.21.4",
+    "cross-fetch": "^3.1.4",
+    "env": "^0.0.2",
+    "graphql": "^15.5.3",
+    "node-fetch": "^3.0.0",
+    "nodemailer": "^6.6.3",
+    "react": "^17.0.2",
+    "urql": "^2.0.4",
+    "web3": "^1.5.2"
+  }
+}
