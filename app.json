@@ -1,40 +1,37 @@
 {
     "name": "Uniswap LP position Monitor",
     "description": "Monitor your LP positions by receiving email notifications when you're no longer earning trading fees",
-    "repository": "https://github.com/buycoinsafrica/recurring-buy",
+    "repository": "https://github.com/buycoinsresearch/lpmonitor",
     "keywords": [
         "node", 
         "cryptocurrency", 
-        "bitcoin",
-        "buycoins"
+        "uniswap",
+        "buycoins",
+        "liquidity pool",
+        "uniswapv3"
     ],
     "success_url": "/",
     "env": {
-        "BUYCOINS_API_PUBLIC": {
-          "description": "Your public key for the BuyCoins API",
+        "SENDGRID_API_KEY": {
+          "description": "Your sendgrid API key",
           "required": true
         },
-        "BUYCOINS_API_SECRET": {
-            "description": "Your private/secret key for the BuyCoins API",
+        "from": {
+            "description": "Your verified Sendgrid sender",
             "required": true
         },
-        "BUY_CURRENCIES": {
-          "description": "What Cryptocurrency would you like to purchase? (e.g. BTC, ETH, etc.)",
+        "to": {
+          "description": "The email address you want to send notifications to",
             "required": false
         },
-        "FAUNA_DB_SECRET": {
+        "lowerTick": {
             "description": "Your secret key for your Fauna Database",
             "required": true
         },
-        "BUY_FREQUENCY": {
+        "upperTick": {
             "description": "How often you want to purchase.",
             "required": true,
             "value": "MONTHLY_1"
-        },
-        "BUY_AMOUNT": {
-            "description": "How much (in Naira) you want to purchase",
-            "required": true,
-            "value": "10000"
         }
       },
       "addons": [
@@ -44,8 +41,5 @@
         {
           "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest"
         }
-      ],
-      "scripts": {
-        "postdeploy": "node postdeploy.js"
-      }
+      ]
     }
