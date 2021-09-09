@@ -29,7 +29,7 @@ Next, you'll need to specify the trading bounds you set in your LP positions. Yo
 
 When deploying, you'll need to add the environment variables from the previous steps to your new app.
 
-![](./public/images/env.png)
+![](./images/env.png)
 
 
 ### 5. Setup Heroku Scheduler
