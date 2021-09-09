@@ -19,6 +19,7 @@ axios.post('https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3', {
     for (let i=0; i<lowerTick.length; i++) {
         if (lowerTick[i] > ethPriceUSD) {
             console.log(lowerTick[i])
+            //You can edit this message and tailor it to anything of your choice
             message = `ethPriceUSD is currently below your ${lowerTick[i]} lower trading bound. 
                 You've stopped earning trading fees`
             sendEmail("Uniswap LP position status", message)
