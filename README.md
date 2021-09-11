@@ -16,14 +16,28 @@ To create an API key, go to Settings > API Keys on SendGrid’s dashboard, then 
 
 ![](images/SendGrid-Create-API-Key.jpeg)
 
-### 2. Specify your trading bounds
+### 2. Generate an Etherscan API Key
+
+* Create an account on Etherscan.
+* Go to https://etherscan.io/myapikey, then click on Add to generate an API key.
+* Copy the API Key and store in a safe place.
+
+### 3. Connect to an Endpoint 
+
+There are various Ethereum nodes available out there. You can register on Infura, Alchemy, etc. If you're using Infura for your project, you can connect to the endpoint by doing the following:
+
+* Go to https://infura.io/dashboard/ethereum/
+* Navigate to settings
+* Make sure you're on the Mainnet, then copy the generated address.
+
+### 4. Specify your trading bounds
 
 Next, you'll need to specify the trading bounds you set in your LP positions. You do this by setting the following environment variables:
 
 1. `lowerTick` - This is the minimum USD price per ETH set for your LP position. You can add multiple LP positions by adding a comma (e.g. `2000,2100,1000`)
 2. `upperTick` - This is the maximum USD price per ETH set for your LP position. You can add multiple LP positions by adding a comma (e.g. `4000,4100,5000`)
 
-### 4. Deploy to Heroku and add environment variables
+### 5. Deploy to Heroku and add environment variables
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/buycoinsresearch/lpmonitor)
 
@@ -32,7 +46,7 @@ When deploying, you'll need to add the environment variables from the previous s
 ![](./images/env.png)
 
 
-### 5. Setup Heroku Scheduler
+### 6. Setup Heroku Scheduler
 
 Finally, go to your Heroku project "Resources" tab and click the Heroku Scheduler Add-on.
 
@@ -44,7 +58,7 @@ Next, create a new job using the following settings:
 ![](./images/heroku-scheduler.png)
 
 
-### 6. (Optional) Get updates
+### 7. (Optional) Get updates
 
 If you want to get updates on this project as we continue to improve it, you'll need to create a fork of this repository to your Github account. 
 
