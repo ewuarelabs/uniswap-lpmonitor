@@ -16,6 +16,18 @@
           "description": "Your sendgrid API key",
           "required": true
         },
+          "ETHERSCAN_API_KEY": {
+            "description": "Your Etherscan API key",
+            "required": true
+          },
+            "Pair Address": {
+              "description": "The contract address of your trading pair",
+              "required": false
+            },
+            "Provider": {
+              "description": "The https link to an Ethereum provider",
+              "required": true
+            },
         "from": {
             "description": "Your verified Sendgrid sender",
             "required": true

@@ -1,11 +1,10 @@
-const sendgrid = require('@sendgrid/mail');
-require('dotenv').config()
+import sendgrid from '@sendgrid/mail';
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 
 sendgrid.setApiKey(SENDGRID_API_KEY)
 
-module.exports = function sendEmail(subject, message) {
+export const sendEmail = (subject, message) => {
     const msg = {
         to: process.env.to, // your recipient
         from: process.env.from, // your verified sender

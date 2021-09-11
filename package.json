@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This is a LP position monitor that lets traders know if their trading pair is out of bounds",
   "main": "priceMonitor.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +13,7 @@
     "@apollo/client": "^3.4.10",
     "@sendgrid/mail": "^7.4.6",
     "axios": "^0.21.4",
+    "bignumber": "^1.1.0",
     "cross-fetch": "^3.1.4",
     "env": "^0.0.2",
     "graphql": "^15.5.3",
