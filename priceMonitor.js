@@ -4,7 +4,9 @@ import { userAction } from './getABI.js';
 //import { config } from './config.js';
 import { sendEmail } from './emailSender.js';
 const lowerTick = process.env.lowerTick.split(",")
+lowerTick = parseInt(lowerTick, 10)
 const upperTick = process.env.upperTick.split(",")
+upperTick = parseInt(upperTick, 10)
 const etherscanApi = process.env.etherscanApiKey
 const pairAddress = process.env.pairAddress
 
