@@ -15,11 +15,10 @@ if (pairAddress == "") {
   pairAddress = "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
 }
 
-const aggregatorV3InterfaceABI = await userAction(pairAddress, etherscanApi);
-const web3 = new Web3(process.env.provider);
-const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr);
-
 const price = async () => {
+    const aggregatorV3InterfaceABI = await userAction(pairAddress, etherscanApi);
+    const web3 = new Web3(process.env.provider);
+    const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr);
     const roundData = await priceFeed.methods.latestRoundData().call()
     const dec = await priceFeed.methods.decimals().call()
     let decimals = new BigNumber(dec);
@@ -27,24 +26,26 @@ const price = async () => {
     return latestPrice;
 }
 
-const pairPrice = await price();
-for (let i=0; i<lowerTick.length; i++) {
-    if (lowerTick[i] > pairPrice) {
-        
-        //You can edit this message and tailor it to anything of your choice
-        message = `Your pair is currently below your ${lowerTick[i]} lower trading bound. 
-            You've stopped earning trading fees`
-        sendEmail("Uniswap LP position status", message)
-    } 
-}
-for (let i=0; i<upperTick.length; i++) {
-    if (upperTick[i] < pairPrice) {
-       
-        message = `Your pair is currently above your ${upperTick[i]} upper trading bound. 
-            You've stopped earning trading fees`
-        sendEmail("Uniswap LP position status", message)
+(async () => {
+    const pairPrice = await price();
+    for (let i=0; i<lowerTick.length; i++) {
+        if (lowerTick[i] > pairPrice) {
+            
+            //You can edit this message and tailor it to anything of your choice
+            message = `Your pair is currently below your ${lowerTick[i]} lower trading bound. 
+                You've stopped earning trading fees`
+            sendEmail("Uniswap LP position status", message)
+        } 
     }
-}
+    for (let i=0; i<upperTick.length; i++) {
+        if (upperTick[i] < pairPrice) {
+        
+            message = `Your pair is currently above your ${upperTick[i]} upper trading bound. 
+                You've stopped earning trading fees`
+            sendEmail("Uniswap LP position status", message)
+        }
+    }
+})();
 
 
 
