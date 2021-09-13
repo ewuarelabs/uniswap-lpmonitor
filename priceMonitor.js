@@ -19,16 +19,12 @@ const aggregatorV3InterfaceABI = await userAction(pairAddress, etherscanApi);
 const web3 = new Web3(process.env.provider);
 const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr);
 
-const price = async () => {priceFeed.methods.latestRoundData().call()
-    .then((roundData) => {
-        priceFeed.methods.decimals().call()
-        .then((dec) => {
-            let decimals = new BigNumber(dec);      
-            const latestPrice = +roundData.answer * 10**(-decimals)
-            //console.log("Latest Round Data", latestPrice)
-            return latestPrice
-        })
-    })
+const price = async () => {
+    const roundData = await priceFeed.methods.latestRoundData().call()
+    const dec = await priceFeed.methods.decimals().call()
+    let decimals = new BigNumber(dec);
+    latestPrice = await parseInt(roundData.answer) * 10**(-decimals)
+    return latestPrice;
 }
 
 const pairPrice = await price();
