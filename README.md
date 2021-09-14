@@ -22,15 +22,18 @@ To create an API key, go to Settings > API Keys on SendGrid’s dashboard, then 
 * Go to https://etherscan.io/myapikey, then click on Add to generate an API key.
 * Copy the API Key and store in a safe place.
 
-### 3. Connect to an Endpoint 
+### 3. Connect to an Ethereum Node 
 
-There are various Ethereum nodes available out there. You can register on Infura, Alchemy, etc. If you're using Infura for your project, you can connect to the endpoint by doing the following:
+There are various Ethereum node providers available out there. You can register on Infura, Alchemy, etc. If you're using Infura for your project, you can connect to an endpoint by doing the following:
 
+* Create an Infura account
 * Go to https://infura.io/dashboard/ethereum/
 * Navigate to settings
 * Make sure you're on the Mainnet, then copy the generated address.
 
-### 4. Specify your trading bounds
+### 4. Specify your pair address and trading bounds
+
+We'll be getting real-time on-chain prices of trading pairs via Chainlink. To consume the Chainlink Data Feeds, we need the contract address of the trading pair. You can get a list of the addresses [here](https://docs.chain.link/docs/ethereum-addresses/). For example, the USDC/ETH address is `0x986b5E1e1755e3C2440e960477f25201B0a8bbD4`.
 
 Next, you'll need to specify the trading bounds you set in your LP positions. You do this by setting the following environment variables:
 
