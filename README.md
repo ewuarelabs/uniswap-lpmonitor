@@ -1,4 +1,4 @@
-# Uniswap LP Monitor
+# Uniswap v3 LP Monitor
 
 This is an open source uniswap v3 monitoring tool that lets you know when your trading pair is out of bounds.
 
