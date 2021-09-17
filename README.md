@@ -37,8 +37,8 @@ We'll be getting real-time on-chain prices of trading pairs via Chainlink. To co
 
 Next, you'll need to specify the trading bounds you set in your LP positions. You do this by setting the following environment variables:
 
-1. `lowerTick` - This is the minimum USD price per ETH set for your LP position. You can add multiple LP positions by adding a comma (e.g. `2000,2100,1000`)
-2. `upperTick` - This is the maximum USD price per ETH set for your LP position. You can add multiple LP positions by adding a comma (e.g. `4000,4100,5000`)
+1. `lowerTick` - This is the minimum tick price for your LP position. You can add multiple LP positions by adding a comma (e.g. `2000,2100,1000`)
+2. `upperTick` - This is the maximum tick price for your LP position. You can add multiple LP positions by adding a comma (e.g. `4000,4100,5000`)
 
 ### 5. Deploy to Heroku and add environment variables
 
