@@ -18,11 +18,11 @@ if (pairAddress == "") {
 const price = async () => {
     const aggregatorV3InterfaceABI = await userAction(pairAddress, etherscanApi);
     const web3 = new Web3(process.env.provider);
-    const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr);
+    const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, pairAddress);
     const roundData = await priceFeed.methods.latestRoundData().call()
     const dec = await priceFeed.methods.decimals().call()
     let decimals = new BigNumber(dec);
-    latestPrice = await parseInt(roundData.answer) * 10**(-decimals)
+    let latestPrice = await parseInt(roundData.answer) * 10**(-decimals)
     return latestPrice;
 }
 
@@ -32,7 +32,7 @@ const price = async () => {
         if (lowerTick[i] > pairPrice) {
             
             //You can edit this message and tailor it to anything of your choice
-            message = `Your pair is currently below your ${lowerTick[i]} lower trading bound. 
+            let message = `Your pair is currently below your ${lowerTick[i]} lower trading bound. 
                 You've stopped earning trading fees`
             sendEmail("Uniswap LP position status", message)
         } 
@@ -40,7 +40,7 @@ const price = async () => {
     for (let i=0; i<upperTick.length; i++) {
         if (upperTick[i] < pairPrice) {
         
-            message = `Your pair is currently above your ${upperTick[i]} upper trading bound. 
+            let message = `Your pair is currently above your ${upperTick[i]} upper trading bound. 
                 You've stopped earning trading fees`
             sendEmail("Uniswap LP position status", message)
         }
