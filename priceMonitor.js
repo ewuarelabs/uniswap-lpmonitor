@@ -34,7 +34,9 @@ const price = async () => {
             //You can edit this message and tailor it to anything of your choice
             let message = `Your pair is currently below your ${lowerTick[i]} lower trading bound. 
                 You've stopped earning trading fees`
-            sendEmail("Uniswap LP position status", message)
+            let htmlMessage = `<p>Your pair is currently below your ${lowerTick[i]} lower trading bound. 
+                You've stopped earning trading fees</p>`
+            sendEmail("Uniswap LP position status", message, htmlMessage)
         } 
     }
     for (let i=0; i<upperTick.length; i++) {
@@ -42,7 +44,9 @@ const price = async () => {
         
             let message = `Your pair is currently above your ${upperTick[i]} upper trading bound. 
                 You've stopped earning trading fees`
-            sendEmail("Uniswap LP position status", message)
+            let htmlMessage = `<p>Your pair is currently above your ${upperTick[i]} upper trading bound. 
+                You've stopped earning trading fees</p>`
+            sendEmail("Uniswap LP position status", message, htmlMessage)
         }
     }
 })();
