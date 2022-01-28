@@ -2,20 +2,11 @@ import Web3 from 'web3';
 import BigNumber from 'bignumber.js';
 import { userAction } from './getABI.js';
 import { sendEmail } from './emailSender.js';
-import express from 'express';
 import dotenv from 'dotenv';
 
 const etherscanApi = process.env.etherscanApiKey
 
 dotenv.config();
-const app = express();
-app.use(
-    express.urlencoded({
-      extended: true
-    })
-)
-  
-app.use(express.json())
 
 export async function getPairPrice(pairAddress) {
 
@@ -34,7 +25,6 @@ export async function HandlePairs(pairAddresses)  {
     const cursor = (await Position.find({ "liquidityPositions.pairAddress": pairs })).forEach(async (position) => {
         if (parseInt(position.liquidityPositions.lowerTick, 10) > pairPrice) {
             
-            //You can edit this message and tailor it to anything of your choice
             let message = `Your pair is currently below your ${position.liquidityPositions.lowerTick} lower trading bound. 
                 You've stopped earning trading fees`
             let htmlMessage = `<p>Your pair is currently below your ${position.liquidityPositions.lowerTick} lower trading bound. 
