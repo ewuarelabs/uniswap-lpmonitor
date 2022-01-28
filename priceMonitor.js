@@ -1,21 +1,24 @@
 import Web3 from 'web3';
 import BigNumber from 'bignumber.js';
 import { userAction } from './getABI.js';
-//import { config } from './config.js';
 import { sendEmail } from './emailSender.js';
-const lowerTick = process.env.lowerTick.split(",")
-lowerTick = parseInt(lowerTick, 10)
-const upperTick = process.env.upperTick.split(",")
-upperTick = parseInt(upperTick, 10)
+import express from 'express';
+import dotenv from 'dotenv';
+
 const etherscanApi = process.env.etherscanApiKey
-const pairAddress = process.env.pairAddress
 
-//if address is not defined, the ETH/USDC pair will be used
-if (pairAddress == "") {
-  pairAddress = "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
-}
+dotenv.config();
+const app = express();
+app.use(
+    express.urlencoded({
+      extended: true
+    })
+)
+  
+app.use(express.json())
 
-const price = async () => {
+export async function getPairPrice(pairAddress) {
+
     const aggregatorV3InterfaceABI = await userAction(pairAddress, etherscanApi);
     const web3 = new Web3(process.env.provider);
     const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, pairAddress);
@@ -26,30 +29,25 @@ const price = async () => {
     return latestPrice;
 }
 
-(async () => {
-    const pairPrice = await price();
-    for (let i=0; i<lowerTick.length; i++) {
-        if (lowerTick[i] > pairPrice) {
+export async function HandlePairs(pairAddresses)  {
+    const pairPrice = await getPairPrice(pairAddresses);
+    const cursor = (await Position.find({ "liquidityPositions.pairAddress": pairs })).forEach(async (position) => {
+        if (parseInt(position.liquidityPositions.lowerTick, 10) > pairPrice) {
             
             //You can edit this message and tailor it to anything of your choice
-            let message = `Your pair is currently below your ${lowerTick[i]} lower trading bound. 
+            let message = `Your pair is currently below your ${position.liquidityPositions.lowerTick} lower trading bound. 
                 You've stopped earning trading fees`
-            let htmlMessage = `<p>Your pair is currently below your ${lowerTick[i]} lower trading bound. 
+            let htmlMessage = `<p>Your pair is currently below your ${position.liquidityPositions.lowerTick} lower trading bound. 
                 You've stopped earning trading fees</p>`
             sendEmail("Uniswap LP position status", message, htmlMessage)
         } 
-    }
-    for (let i=0; i<upperTick.length; i++) {
-        if (upperTick[i] < pairPrice) {
+        if (parseInt(position.liquidityPositions.upperTick, 10) < pairPrice) {
         
-            let message = `Your pair is currently above your ${upperTick[i]} upper trading bound. 
+            let message = `Your pair is currently above your ${position.liquidityPositions.upperTick} upper trading bound. 
                 You've stopped earning trading fees`
-            let htmlMessage = `<p>Your pair is currently above your ${upperTick[i]} upper trading bound. 
+            let htmlMessage = `<p>Your pair is currently above your ${position.liquidityPositions.upperTick} upper trading bound. 
                 You've stopped earning trading fees</p>`
             sendEmail("Uniswap LP position status", message, htmlMessage)
         }
-    }
-})();
-
-
-
+    });
+}

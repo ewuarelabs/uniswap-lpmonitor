@@ -4,13 +4,14 @@ const Schema = mongoose.Schema;
 const userPositionSchema = new Schema({
     email: {
         type: String,
-        required: true,
+        required: true
     },
-    liquidityPositions: [{
+    liquidityPositions: {
+        lpname: {type: String, required: true, unique: true},
         pairAddress: String,
-        upperTick: Number,
-        lowerTick: Number
-    }]
+        upperTick: String,
+        lowerTick: String
+    }
 }, {timestamps: true});
 
 export const Position = mongoose.model('Position', userPositionSchema); 
